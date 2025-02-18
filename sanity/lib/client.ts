@@ -7,5 +7,12 @@ export const client = createClient({
   dataset,
   projectId,
   useCdn,
-  // perspective: 'published',
+  perspective: 'published',
+  stega: {
+    enabled: false,
+    studioUrl: '/studio',
+  },
+  token: process.env.SANITY_API_TOKEN,
+  ignoreBrowserTokenWarning: true,
+  withCredentials: true,
 })

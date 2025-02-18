@@ -9,7 +9,10 @@ import { getIP } from '~/lib/ip'
 import { redis } from '~/lib/redis'
 
 export const config = {
-  matcher: ['/((?!_next|studio|.*\\..*).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\..*|api/auth).*)',
+    '/admin/:path*',
+  ],
 }
 
 export default async function middleware(req: NextRequest) {

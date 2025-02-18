@@ -6,7 +6,7 @@ import { Suspense } from 'react'
 import { Footer } from '~/app/(main)/Footer'
 import { Header } from '~/app/(main)/Header'
 import { QueryProvider } from '~/app/QueryProvider'
-
+import { Providers } from './Providers'
 export default function BlogLayout({
   children,
 }: {
@@ -24,13 +24,15 @@ export default function BlogLayout({
       </div>
 
       <QueryProvider>
-        <div className="relative text-zinc-800 dark:text-zinc-200">
-          <Header />
-          <main>{children}</main>
-          <Suspense>
-            <Footer />
-          </Suspense>
-        </div>
+        <Providers>
+          <div className="relative text-zinc-800 dark:text-zinc-200">
+            <Header />
+            <main>{children}</main>
+            <Suspense>
+              <Footer />
+            </Suspense>
+          </div>
+        </Providers>
       </QueryProvider>
 
       <Analytics />

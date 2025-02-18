@@ -5,11 +5,10 @@ import { Headline } from '~/app/(main)/Headline'
 import { Newsletter } from '~/app/(main)/Newsletter'
 import { Photos } from '~/app/(main)/Photos'
 import { Resume } from '~/app/(main)/Resume'
-import { PencilSwooshIcon } from '~/assets'
 import { Container } from '~/components/ui/Container'
 import { getSettings } from '~/sanity/queries'
 
-export default async function BlogHomePage() {
+export default async function HomePage() {
   const settings = await getSettings()
 
   return (
@@ -22,10 +21,9 @@ export default async function BlogHomePage() {
 
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-6 pt-6">
-            <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-              <PencilSwooshIcon className="h-5 w-5 flex-none" />
-              <span className="ml-2">近期文章</span>
+          <div className="flex flex-col gap-6">
+            <h2 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">
+              Latest Articles
             </h2>
             <BlogPosts />
           </div>

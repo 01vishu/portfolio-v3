@@ -42,12 +42,12 @@ export function Photos({ photos }: { photos: string[] }) {
         {photos.map((image, idx) => (
           <motion.div
             key={idx}
-            className="relative h-40 flex-none shrink-0 snap-start overflow-hidden rounded-xl bg-zinc-100 ring-2 ring-lime-800/20 dark:bg-zinc-800 dark:ring-lime-300/10 md:h-72 md:rounded-3xl"
+            className="relative h-40 flex-none shrink-0 snap-start overflow-hidden rounded-xl bg-zinc-100 ring-2 ring-emerald-800/20 dark:bg-zinc-800 dark:ring-emerald-300/10 md:h-72 md:rounded-3xl"
             animate={{
               width,
               opacity: isCompact ? 1 : 0.85,
               filter: isCompact ? 'grayscale(0)' : 'grayscale(0.5)',
-              rotate: idx % 2 === 0 ? 2 : -1,
+              rotate: idx % 2 === 0 ? 1 : -1,
             }}
             whileHover={
               isCompact
@@ -56,13 +56,18 @@ export function Photos({ photos }: { photos: string[] }) {
                     width: expandedWidth,
                     opacity: 1,
                     filter: 'grayscale(0)',
+                    scale: 1.02,
+                    transition: {
+                      duration: 0.3,
+                      ease: 'easeOut',
+                    },
                   }
             }
             layout
           >
             <Image
               src={image}
-              alt=""
+              alt="Project showcase"
               width={500}
               height={500}
               sizes="(min-width: 640px) 18rem, 11rem"

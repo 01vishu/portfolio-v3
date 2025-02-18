@@ -25,14 +25,14 @@ function NavItem({
         className={clsxm(
           'relative block whitespace-nowrap px-3 py-2 transition',
           isActive
-            ? 'text-lime-600 dark:text-lime-400'
-            : 'hover:text-lime-600 dark:hover:text-lime-400'
+            ? 'text-emerald-600 dark:text-emerald-400'
+            : 'hover:text-emerald-600 dark:hover:text-emerald-400'
         )}
       >
         {children}
         {isActive && (
           <motion.span
-            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-lime-700/0 via-lime-700/70 to-lime-700/0 dark:from-lime-400/0 dark:via-lime-400/40 dark:to-lime-400/0"
+            className="absolute inset-x-1 -bottom-px h-px bg-gradient-to-r from-emerald-700/0 via-emerald-700/70 to-emerald-700/0 dark:from-emerald-400/0 dark:via-emerald-400/40 dark:to-emerald-400/0"
             layoutId="active-nav-item"
           />
         )}
@@ -67,7 +67,7 @@ function Desktop({
         'rounded-full bg-gradient-to-b from-zinc-50/70 to-white/90',
         'shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md',
         'dark:from-zinc-900/70 dark:to-zinc-800/90 dark:ring-zinc-100/10',
-        '[--spotlight-color:rgb(236_252_203_/_0.6)] dark:[--spotlight-color:rgb(217_249_157_/_0.07)]',
+        '[--spotlight-color:rgb(209_250_229_/_0.6)] dark:[--spotlight-color:rgb(167_243_208_/_0.07)]',
         className
       )}
       {...props}
@@ -79,7 +79,7 @@ function Desktop({
         aria-hidden="true"
       />
 
-      <ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200 ">
+      <ul className="flex bg-transparent px-3 text-sm font-medium text-zinc-800 dark:text-zinc-200">
         {navigationItems.map(({ href, text }) => (
           <NavItem key={href} href={href}>
             {text}
@@ -109,9 +109,8 @@ function MobileNavItem({
 function Mobile(props: PopoverProps<'div'>) {
   return (
     <Popover {...props}>
-      <Popover.Button className="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-yellow-500/80">
-        前往
-        {/* Chevron */}
+      <Popover.Button className="group flex items-center rounded-full bg-gradient-to-b from-zinc-50/20 to-white/80 px-4 py-2 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur-md focus:outline-none focus-visible:ring-2 dark:from-zinc-900/30 dark:to-zinc-800/80 dark:text-zinc-200 dark:ring-white/10 dark:hover:ring-white/20 dark:focus-visible:ring-emerald-500/80">
+        Menu
         <svg
           viewBox="0 0 8 6"
           aria-hidden="true"
@@ -152,7 +151,7 @@ function Mobile(props: PopoverProps<'div'>) {
             className="fixed inset-x-4 top-8 z-50 origin-top rounded-3xl bg-gradient-to-b from-zinc-100/75 to-white p-8 ring-1 ring-zinc-900/5 dark:from-zinc-900/50 dark:to-zinc-900 dark:ring-zinc-800"
           >
             <div className="flex flex-row-reverse items-center justify-between">
-              <Popover.Button aria-label="关闭菜单" className="-m-1 p-1">
+              <Popover.Button aria-label="Close menu" className="-m-1 p-1">
                 <svg
                   viewBox="0 0 24 24"
                   aria-hidden="true"
@@ -169,7 +168,7 @@ function Mobile(props: PopoverProps<'div'>) {
                 </svg>
               </Popover.Button>
               <h2 className="text-sm font-medium text-zinc-600 dark:text-zinc-400">
-                站内导航
+                Navigation
               </h2>
             </div>
             <nav className="mt-6">

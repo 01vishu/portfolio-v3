@@ -1,27 +1,35 @@
 import NextAuth from 'next-auth'
+import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL
 
 export const {
-  handlers: { GET, POST },
   auth,
   signIn,
   signOut,
+  handlers: { GET, POST },
 } = NextAuth({
   providers: [
+    GitHub({
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
+    }),
     Google({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      clientId: process.env.GOOGLE_ID,
+      clientSecret: process.env.GOOGLE_SECRET,
     }),
   ],
   callbacks: {
-    async signIn({ user }) {
-      // Only allow specific admin email
-      return user.email === ADMIN_EMAIL
+    jwt({ token, profile, account }) {
+      if (profile && account) {
+        token.provider = account.provider
+      }
+      return token
     },
-    async session({ session, token }) {
-      if (session.user) {
+    session({ session, token }) {
+      if (session.user && typeof token.provider === 'string') {
+        session.user.provider = token.provider
         session.user.isAdmin = session.user.email === ADMIN_EMAIL
       }
       return session
@@ -30,5 +38,8 @@ export const {
   pages: {
     signIn: '/login',
     error: '/login',
+  },
+  session: {
+    strategy: 'jwt',
   },
 })

@@ -9,13 +9,15 @@ import { useForm } from 'react-hook-form'
 import { useReward } from 'react-rewards'
 import { z } from 'zod'
 
-import { TiltedSendIcon } from '~/assets'
 import { Button } from '~/components/ui/Button'
 
 const formId = '5108903'
 
 export const newsletterFormSchema = z.object({
-  email: z.string().email({ message: '邮箱地址不正确' }).nonempty(),
+  email: z
+    .string()
+    .email({ message: 'Please enter a valid email address' })
+    .nonempty(),
   formId: z.string().nonempty(),
 })
 export type NewsletterForm = z.infer<typeof newsletterFormSchema>
@@ -33,7 +35,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
   const [isSubscribed, setIsSubscribed] = React.useState(false)
   const { reward } = useReward('newsletter-rewards', 'emoji', {
     position: 'absolute',
-    emoji: ['🤓', '😊', '🥳', '🤩', '🤪', '🤯', '🥰', '😎', '🤑', '🤗', '😇'],
+    emoji: ['🚀', '✨', '💫', '🌟', '💡', '🎯', '🎨', '💻', '🔥', '⚡️', '🌈'],
     elementCount: 32,
   })
   const onSubmit = React.useCallback(
@@ -78,18 +80,30 @@ export function Newsletter({ subCount }: { subCount?: string }) {
     >
       <input type="hidden" className="hidden" {...register('formId')} />
       <h2 className="flex items-center text-sm font-semibold text-zinc-900 dark:text-zinc-100">
-        <TiltedSendIcon className="h-5 w-5 flex-none" />
-        <span className="ml-2">动态更新</span>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          strokeWidth="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+          className="h-5 w-5 flex-none stroke-emerald-500"
+        >
+          <path d="M2.75 7.75a3 3 0 013-3h12.5a3 3 0 013 3v8.5a3 3 0 01-3 3H5.75a3 3 0 01-3-3v-8.5z" />
+          <path d="M3 9l9 6l9-6" />
+        </svg>
+        <span className="ml-2">Stay Updated</span>
       </h2>
       <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400 md:text-sm">
-        <span>喜欢我的内容的话不妨订阅支持一下 🫶</span>
+        <span>Get notified when I publish new content 🚀</span>
         <br />
         {subCount && (
           <span>
-            加入其他 <span className="font-medium">{subCount}</span> 位订阅者，
+            Join <span className="font-medium">{subCount}</span>{' '}
+            subscribers.{' '}
           </span>
         )}
-        <span>每月一封，随时可以取消订阅。</span>
+        <span>One email per month. Unsubscribe anytime.</span>
       </p>
       <AnimatePresence mode="wait">
         {!isSubscribed ? (
@@ -101,10 +115,10 @@ export function Newsletter({ subCount }: { subCount?: string }) {
           >
             <input
               type="email"
-              placeholder="你的邮箱"
-              aria-label="电子邮箱"
+              placeholder="Enter your email"
+              aria-label="Email address"
               required
-              className="min-w-0 flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-lime-500 focus:outline-none focus:ring-4 focus:ring-lime-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-lime-400/50 dark:focus:ring-lime-400/5 sm:text-sm"
+              className="min-w-0 flex-auto appearance-none rounded-lg border border-zinc-900/10 bg-white px-3 py-[calc(theme(spacing.2)-1px)] placeholder:text-zinc-400 focus:border-emerald-500 focus:outline-none focus:ring-4 focus:ring-emerald-500/10 dark:border-zinc-700 dark:bg-zinc-700/[0.15] dark:text-zinc-200 dark:placeholder:text-zinc-500 dark:focus:border-emerald-400/50 dark:focus:ring-emerald-400/5 sm:text-sm"
               {...register('email')}
             />
             <Button
@@ -112,7 +126,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
               className="ml-2 flex-none"
               disabled={isSubmitting}
             >
-              订阅
+              Subscribe
             </Button>
           </motion.div>
         ) : (
@@ -122,7 +136,7 @@ export function Newsletter({ subCount }: { subCount?: string }) {
             animate={{ opacity: 1, y: 0 }}
             exit="initial"
           >
-            请查收订阅确认邮件 🥳
+            Check your inbox to confirm subscription ✨
           </motion.p>
         )}
       </AnimatePresence>

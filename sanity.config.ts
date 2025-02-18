@@ -1,5 +1,5 @@
 /**
- * This configuration is used to for the Sanity Studio that’s mounted on the `/app/studio/[[...index]]/page.tsx` route
+ * This configuration is used to for the Sanity Studio that's mounted on the `/app/studio/[[...index]]/page.tsx` route
  */
 
 import { codeInput } from '@sanity/code-input'
@@ -34,4 +34,12 @@ export default defineConfig({
     media(),
     codeInput(),
   ],
+  document: {
+    productionUrl: async (prev, { document }) => {
+      const url = new URL('/api/preview', location.origin)
+      url.searchParams.append('type', document._type)
+      url.searchParams.append('id', document._id)
+      return url.toString()
+    },
+  },
 })
